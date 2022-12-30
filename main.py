@@ -5,7 +5,7 @@ from presenter import Presenter
 from view import View
 
 
-def main(page: ft.Page):
+def main(page: ft.Page) -> None:
     model = Model(page)
     view = View()
     presenter = Presenter(model, view)
