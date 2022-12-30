@@ -23,7 +23,6 @@ class Presenter:
 
     def build(self) -> ft.Row:
         initial_number = self.model.get_last_number()
-        print(initial_number)
         self.view.set_current_number(str(initial_number))
         self.model.page.update()
         return self.view.get_ui(self)
