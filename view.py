@@ -1,14 +1,6 @@
-from typing import Protocol
-
 import flet as ft
 
-
-class Presenter(Protocol):
-    def handle_plus_click(self) -> None:
-        ...
-
-    def handle_minus_click(self) -> None:
-        ...
+from protocols import PresenterProtocol
 
 
 class View:
@@ -17,7 +9,7 @@ class View:
             value="0", text_align=ft.TextAlign.RIGHT, width=100
         )
 
-    def get_ui(self, presenter: Presenter) -> ft.Row:
+    def get_ui(self, presenter: PresenterProtocol) -> ft.Row:
         return ft.Row(
             [
                 ft.IconButton(ft.icons.REMOVE, on_click=presenter.handle_minus_click),
