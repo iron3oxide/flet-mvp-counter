@@ -2,21 +2,18 @@ import flet as ft
 
 
 class Model:
-    def __init__(self, page: ft.Page) -> None:
-        self.page = page
-
-    def get_last_number(self) -> int:
-        if self.page.client_storage.contains_key("last_number"):
-            return self.page.client_storage.get("last_number")  # type: ignore
+    def get_last_number(self, page: ft.Page) -> int:
+        if page.client_storage.contains_key("last_number"):
+            return page.client_storage.get("last_number")  # type: ignore
 
         return 0
 
-    def increase_number(self, number: int) -> int:
+    def increase_number(self, page: ft.Page, number: int) -> int:
         number += 1
-        self.page.client_storage.set("last_number", number)
+        page.client_storage.set("last_number", number)
         return number
 
-    def decrease_number(self, number: int) -> int:
+    def decrease_number(self, page: ft.Page, number: int) -> int:
         number -= 1
-        self.page.client_storage.set("last_number", number)
+        page.client_storage.set("last_number", number)
         return number

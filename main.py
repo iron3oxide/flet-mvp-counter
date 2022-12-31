@@ -6,9 +6,9 @@ from view import View
 
 
 def main(page: ft.Page) -> None:
-    model = Model(page)
+    model = Model()
     view = View()
-    presenter = Presenter(model, view)
+    presenter = Presenter(model, view, page)
     ui = presenter.build()
 
     page.title = "Flet counter example"
