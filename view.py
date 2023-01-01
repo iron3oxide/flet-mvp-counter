@@ -19,8 +19,10 @@ class View:
             alignment=ft.MainAxisAlignment.CENTER,
         )
 
-    def get_current_number(self) -> int:
+    @property
+    def current_number(self) -> int:
         return int(self._txt_number.value)  # type: ignore
 
-    def set_current_number(self, number: str) -> None:
-        self._txt_number.value = number
+    @current_number.setter
+    def current_number(self, number: int) -> None:
+        self._txt_number.value = str(number)

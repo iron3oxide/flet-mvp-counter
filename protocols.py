@@ -15,8 +15,10 @@ class ViewProtocol(Protocol):
     def get_ui(self, presenter: PresenterProtocol) -> ft.Row:
         ...
 
-    def get_current_number(self) -> int:
+    @property
+    def current_number(self) -> int:
         ...
 
-    def set_current_number(self, number: str) -> None:
+    @current_number.setter
+    def current_number(self, number: int) -> None:
         ...
