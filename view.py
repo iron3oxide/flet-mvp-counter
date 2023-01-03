@@ -9,12 +9,18 @@ class View:
             value="0", text_align=ft.TextAlign.RIGHT, width=100
         )
 
-    def get_ui(self, presenter: PresenterProtocol) -> ft.Row:
+    def get_component(self, presenter: PresenterProtocol) -> ft.Row:
+        def remove_button():
+            return ft.IconButton(ft.icons.REMOVE, on_click=presenter.handle_minus_click)
+
+        def add_button():
+            return ft.IconButton(ft.icons.ADD, on_click=presenter.handle_plus_click)
+
         return ft.Row(
             [
-                ft.IconButton(ft.icons.REMOVE, on_click=presenter.handle_minus_click),
+                remove_button(),
                 self._txt_number,
-                ft.IconButton(ft.icons.ADD, on_click=presenter.handle_plus_click),
+                add_button(),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
         )
@@ -26,3 +32,5 @@ class View:
     @current_number.setter
     def current_number(self, number: int) -> None:
         self._txt_number.value = str(number)
+        if self._txt_number.page:
+            self._txt_number.update()

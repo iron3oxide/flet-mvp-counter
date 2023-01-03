@@ -12,7 +12,7 @@ class PresenterProtocol(Protocol):
 
 
 class ViewProtocol(Protocol):
-    def get_ui(self, presenter: PresenterProtocol) -> ft.Row:
+    def get_component(self, presenter: PresenterProtocol) -> ft.Row:
         ...
 
     @property
