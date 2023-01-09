@@ -10,10 +10,11 @@ class Presenter:
         self.view = view
         self.page = page
 
-    def build(self) -> ft.Row:
+    def build(self):
+        component = self.view.get_component(self)
+        self.page.add(component)
         initial_number = self.model.get_last_number(self.page)
         self.view.current_number = initial_number
-        return self.view.get_component(self)
 
     def handle_plus_click(self, e) -> None:
         old_number = self.view.current_number
