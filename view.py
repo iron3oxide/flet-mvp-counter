@@ -9,21 +9,11 @@ class View:
         self._txt_number = ft.Ref[ft.TextField]()
 
     def get_component(self, presenter: PresenterProtocol) -> ft.Row:
-
-        plus_button = buttons.add()
-        plus_button.on_click = presenter.handle_plus_click
-
-        minus_button = buttons.remove()
-        minus_button.on_click = presenter.handle_minus_click
-
-        counter_field = text_fields.counter()
-        # counter_field.ref = self._txt_number
-
         return ft.Row(
             [
-                minus_button,
-                counter_field,
-                plus_button,
+                buttons.remove(presenter.handle_minus_click),
+                text_fields.counter(self._txt_number),
+                buttons.add(presenter.handle_plus_click),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
         )
