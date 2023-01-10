@@ -3,7 +3,7 @@ from typing import Protocol
 import flet as ft
 
 
-class PresenterProtocol(Protocol):
+class CounterPresenterProtocol(Protocol):
     def handle_plus_click(self, e) -> None:
         ...
 
@@ -11,8 +11,11 @@ class PresenterProtocol(Protocol):
         ...
 
 
-class ViewProtocol(Protocol):
-    def get_component(self, presenter: PresenterProtocol) -> ft.Row:
+class CounterViewProtocol(Protocol):
+    def build(self, presenter: CounterPresenterProtocol) -> None:
+        ...
+
+    def _get_ui(self, presenter: CounterPresenterProtocol) -> ft.Row:
         ...
 
     @property

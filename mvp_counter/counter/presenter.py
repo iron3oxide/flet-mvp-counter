@@ -1,18 +1,19 @@
 import flet as ft
 
-from model import Model
-from protocols import ViewProtocol
+from mvp_counter.counter.model import CounterModel
+from mvp_counter.counter.protocols import CounterViewProtocol
 
 
-class Presenter:
-    def __init__(self, model: Model, view: ViewProtocol, page: ft.Page) -> None:
+class CounterPresenter:
+    def __init__(
+        self, model: CounterModel, view: CounterViewProtocol, page: ft.Page
+    ) -> None:
         self.model = model
         self.view = view
         self.page = page
 
     def build(self):
-        component = self.view.get_component(self)
-        self.page.add(component)
+        self.view.build(self)
         initial_number = self.model.get_last_number(self.page)
         self.view.current_number = initial_number
 

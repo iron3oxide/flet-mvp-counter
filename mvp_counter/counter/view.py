@@ -1,14 +1,24 @@
 import flet as ft
 
-from components import buttons, text_fields
-from protocols import PresenterProtocol
+from mvp_counter.blocks import buttons, text_fields
+from mvp_counter.counter.protocols import CounterPresenterProtocol
 
 
-class View:
+class CounterView(ft.View):
     def __init__(self) -> None:
+        super().__init__(
+            route="/counter",
+            vertical_alignment=ft.MainAxisAlignment.CENTER,
+            appbar=ft.AppBar(),
+        )
+
         self._txt_number = ft.Ref[ft.TextField]()
 
-    def get_component(self, presenter: PresenterProtocol) -> ft.Row:
+    def build(self, presenter: CounterPresenterProtocol) -> None:
+        ui = self._get_ui(presenter)
+        self.controls.append(ui)
+
+    def _get_ui(self, presenter: CounterPresenterProtocol) -> ft.Row:
         return ft.Row(
             [
                 buttons.remove(presenter.handle_minus_click),
@@ -25,4 +35,5 @@ class View:
     @current_number.setter
     def current_number(self, number: int) -> None:
         self._txt_number.current.value = str(number)
-        self._txt_number.current.update()
+        if self._txt_number.current.page:
+            self._txt_number.current.update()
