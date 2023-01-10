@@ -12,17 +12,17 @@ class CounterPresenter:
         self.view = view
         self.page = page
 
-    def build(self):
+    def build(self) -> None:
         self.view.build(self)
         initial_number = self.model.get_last_number(self.page)
         self.view.current_number = initial_number
 
-    def handle_plus_click(self, e) -> None:
+    def handle_plus_click(self, e: ft.ControlEvent) -> None:
         old_number = self.view.current_number
         new_number = self.model.increase_number(self.page, old_number)
         self.view.current_number = new_number
 
-    def handle_minus_click(self, e) -> None:
+    def handle_minus_click(self, e: ft.ControlEvent) -> None:
         old_number = self.view.current_number
         new_number = self.model.decrease_number(self.page, old_number)
         self.view.current_number = new_number

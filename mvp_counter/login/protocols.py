@@ -4,18 +4,15 @@ import flet as ft
 
 
 class LoginPresenterProtocol(Protocol):
-    def build(self):
+    def build(self) -> None:
         ...
 
-    def handle_login_attempt(self, e):
+    def handle_login_attempt(self, e: ft.ControlEvent) -> None:
         ...
 
 
 class LoginViewProtocol(Protocol):
     def build(self, presenter: LoginPresenterProtocol) -> None:
-        ...
-
-    def _get_ui(self, presenter: LoginPresenterProtocol) -> ft.Card:
         ...
 
     @property

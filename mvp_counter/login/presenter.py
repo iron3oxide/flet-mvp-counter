@@ -14,13 +14,13 @@ class LoginPresenter:
 
         self.page.on_login = self.handle_login
 
-    def build(self):
+    def build(self) -> None:
         self.view.build(self)
 
-    def handle_login_attempt(self, e: ft.Event):
+    def handle_login_attempt(self, e: ft.ControlEvent) -> None:
         self.model.login(self.page)
 
-    def handle_login(self, e: ft.LoginEvent):
+    def handle_login(self, e: ft.LoginEvent) -> None:
         if e.error:
             return
         if self.view.remember_me:
