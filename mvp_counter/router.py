@@ -1,24 +1,23 @@
 import flet as ft
 
-from mvp_counter import ui
+from mvp_counter.ui import Ui
 
 
 class Router:
     def __init__(self, page: ft.Page) -> None:
         self.page = page
-        self.login_view = ui.build_login(self.page)
-        self.counter_view = ui.build_counter(self.page)
+        self.ui = Ui(self.page)
 
     def append_view(self, e: ft.RouteChangeEvent) -> None:
+        self.page.views.clear()
         match e.route:
             case "/counter":
-                if not self.page.auth:
-                    return
-
-                self.page.views.append(self.counter_view)
+                self.page.views.append(self.ui.counter_view())
 
             case _:
-                self.page.views.append(self.login_view)
+                self.page.views.append(self.ui.login_view())
+
+        self.page.update()
 
     def pop_view(self, e: ft.ViewPopEvent) -> None:
         if len(self.page.views) == 1:
