@@ -1,14 +1,14 @@
 import flet as ft
+from flet_routed_app import RoutedApp
 
-from mvp_counter.router import Router
+from mvp_counter import views
 
 
 def main(page: ft.Page) -> None:
     page.title = "Flet counter example"
 
-    router = Router(page)
-    page.on_route_change = router.append_view
-    page.on_view_pop = router.pop_view
+    app = RoutedApp(page)
+    app.add_view_builders(views.view_builders)
 
     page.go("/login")
 

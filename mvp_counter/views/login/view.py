@@ -1,13 +1,13 @@
 import flet as ft
 
-from mvp_counter.blocks import buttons
-from mvp_counter.login.protocols import LoginPresenterProtocol
+from mvp_counter.controls import buttons
+from mvp_counter.views.login.protocols import LoginPresenterProtocol
 
 
 class LoginView(ft.View):
-    def __init__(self):
+    def __init__(self, route: str):
         super().__init__(
-            route="/login",
+            route=route,
             vertical_alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )

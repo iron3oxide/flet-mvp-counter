@@ -1,16 +1,18 @@
 import flet as ft
 
-from mvp_counter.counter.model import CounterModel
-from mvp_counter.counter.protocols import CounterViewProtocol
+from flet_routed_app import RoutedApp
+from mvp_counter.views.counter.model import CounterModel
+from mvp_counter.views.counter.protocols import CounterViewProtocol
 
 
 class CounterPresenter:
     def __init__(
-        self, model: CounterModel, view: CounterViewProtocol, page: ft.Page
+        self, *, model: CounterModel, view: CounterViewProtocol, app: RoutedApp
     ) -> None:
         self.model = model
         self.view = view
-        self.page = page
+        self.app = app
+        self.page = self.app.page
 
     def build(self) -> None:
         self.view.build(self)

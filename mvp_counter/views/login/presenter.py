@@ -1,16 +1,18 @@
 import flet as ft
+from flet_routed_app import RoutedApp
 
-from mvp_counter.login.model import LoginModel
-from mvp_counter.login.protocols import LoginViewProtocol
+from mvp_counter.views.login.model import LoginModel
+from mvp_counter.views.login.protocols import LoginViewProtocol
 
 
 class LoginPresenter:
     def __init__(
-        self, model: LoginModel, view: LoginViewProtocol, page: ft.Page
+        self, *, model: LoginModel, view: LoginViewProtocol, app: RoutedApp
     ) -> None:
         self.model = model
         self.view = view
-        self.page = page
+        self.app = app
+        self.page = self.app.page
 
         self.page.on_login = self.handle_login
 

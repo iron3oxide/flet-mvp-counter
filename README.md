@@ -20,6 +20,6 @@ To try it yourself:
 8. copy the client secret and client id
    and paste them to the corresponding keys in the .env file
 9. choose a random string for `APP_SECRET_KEY`
-10. run main.py to see the app in action
+10. run app.py to see the app in action
 
 Feedback and PRs are welcome.

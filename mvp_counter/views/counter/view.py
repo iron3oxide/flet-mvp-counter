@@ -1,13 +1,13 @@
 import flet as ft
 
-from mvp_counter.blocks import buttons, text_fields
-from mvp_counter.counter.protocols import CounterPresenterProtocol
+from mvp_counter.controls import buttons, text_fields
+from mvp_counter.views.counter.protocols import CounterPresenterProtocol
 
 
 class CounterView(ft.View):
-    def __init__(self) -> None:
+    def __init__(self, route: str) -> None:
         super().__init__(
-            route="/counter",
+            route=route,
             vertical_alignment=ft.MainAxisAlignment.CENTER,
             appbar=ft.AppBar(),
         )
