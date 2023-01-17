@@ -281,20 +281,18 @@ websocket-client = ">=1.2.1"
 
 [[package]]
 name = "flet-routed-app"
-version = "0.1.0"
+version = "0.1.1"
 description = "Tools to build flet apps with multiple views/routes"
 category = "main"
 optional = false
-python-versions = "^3.11"
-files = []
-develop = true
+python-versions = ">=3.11,<4.0"
+files = [
+    {file = "flet_routed_app-0.1.1-py3-none-any.whl", hash = "sha256:090a5d0c9966b1515da369b548205b82d6084838b5bd559f8fb6a00d329d38a8"},
+    {file = "flet_routed_app-0.1.1.tar.gz", hash = "sha256:d4df8033ff929528a66d4051408bbda745f4abb22ed8ddea45ffc6af912e566a"},
+]
 
 [package.dependencies]
-flet = "^0.3.2"
-
-[package.source]
-type = "directory"
-url = "../flet-routed-app"
+flet = ">=0.3.2,<0.4.0"
 
 [[package]]
 name = "idna"
@@ -556,4 +554,4 @@ test = ["websockets"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "06e30dd0689fd6a02aa1e4668390b7db26f361d69d6b7a2ccdf64c6a23824ee7"
+content-hash = "c7a339c13fd032efb8630e89330006b4ce30a00140f29d170de44c1e309b82cb"
