@@ -16,8 +16,13 @@ class LoginPresenter:
 
         self.page.on_login = self.handle_login
 
+        self.app.state["demo"] = "State sharing works!"
+
     def build(self) -> None:
         self.view.build(self)
+
+    def access_from_app_demo(self) -> None:
+        print("Accessing presenter of built view works!")
 
     def handle_login_attempt(self, e: ft.ControlEvent) -> None:
         self.model.login(self.page)

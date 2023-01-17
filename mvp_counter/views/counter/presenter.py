@@ -1,6 +1,6 @@
 import flet as ft
-
 from flet_routed_app import RoutedApp
+
 from mvp_counter.views.counter.model import CounterModel
 from mvp_counter.views.counter.protocols import CounterViewProtocol
 
@@ -13,6 +13,9 @@ class CounterPresenter:
         self.view = view
         self.app = app
         self.page = self.app.page
+
+        self.app.route_to_viewbuilder["/login"].presenter.access_from_app_demo()  # type: ignore
+        print(self.app.state["demo"])
 
     def build(self) -> None:
         self.view.build(self)
