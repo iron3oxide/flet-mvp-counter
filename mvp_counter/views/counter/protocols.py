@@ -1,24 +1,20 @@
 from typing import Protocol
 
-import flet as ft
+from flet_mvp_utils import MvpViewProtocol
+from pydantic import BaseModel
 
 
 class CounterPresenterProtocol(Protocol):
-    def handle_plus_click(self, e: ft.ControlEvent) -> None:
+    def handle_increment_intent(self) -> None:
         ...
 
-    def handle_minus_click(self, e: ft.ControlEvent) -> None:
+    def handle_decrement_intent(self) -> None:
         ...
 
 
-class CounterViewProtocol(Protocol):
+class CounterViewProtocol(MvpViewProtocol):
+    def render(self, model: BaseModel) -> None:
+        ...
+
     def build(self, presenter: CounterPresenterProtocol) -> None:
-        ...
-
-    @property
-    def current_number(self) -> int:
-        ...
-
-    @current_number.setter
-    def current_number(self, number: int) -> None:
         ...

@@ -9,11 +9,14 @@ packages = [{ include = "mvp_counter" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-flet = "^0.3.2"
+flet = { version = "^0.3.2", allow-prereleases = true }
 pydantic = "^1.10.4"
 python-dotenv = "^0.21.0"
 cryptography = "^39.0.0"
-flet-routed-app = "^0.1.1"
+flet-routed-app = "^0.3.2"
+# flet-routed-app = { path = "../flet-routed-app/", develop = true }
+# flet-mvp-utils = { path = "../flet-mvp-utils/", develop = true }
+flet-mvp-utils = "^0.3.1"
 
 [build-system]
 requires = ["poetry-core"]

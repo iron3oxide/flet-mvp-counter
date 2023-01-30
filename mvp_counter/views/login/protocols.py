@@ -1,20 +1,17 @@
 from typing import Protocol
 
-import flet as ft
+from flet_mvp_utils import MvpViewProtocol
+from pydantic import BaseModel
 
 
 class LoginPresenterProtocol(Protocol):
-    def build(self) -> None:
-        ...
-
-    def handle_login_attempt(self, e: ft.ControlEvent) -> None:
+    def handle_login_intent(self, remember_me: bool) -> None:
         ...
 
 
-class LoginViewProtocol(Protocol):
+class LoginViewProtocol(MvpViewProtocol):
     def build(self, presenter: LoginPresenterProtocol) -> None:
         ...
 
-    @property
-    def remember_me(self) -> bool:
+    def render(self, model: BaseModel) -> None:
         ...

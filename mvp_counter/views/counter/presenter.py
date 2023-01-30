@@ -1,33 +1,24 @@
-import flet as ft
-from flet_routed_app import RoutedApp
+from flet_mvp_utils import MvpPresenter
 
-from mvp_counter.views.counter.model import CounterModel
+from mvp_counter.views.counter.business_logic import CounterDataSource
 from mvp_counter.views.counter.protocols import CounterViewProtocol
 
 
-class CounterPresenter:
+class CounterPresenter(MvpPresenter):
     def __init__(
-        self, *, model: CounterModel, view: CounterViewProtocol, app: RoutedApp
+        self, *, data_source: CounterDataSource, view: CounterViewProtocol
     ) -> None:
-        self.model = model
+        self.data_source = data_source
         self.view = view
-        self.app = app
-        self.page = self.app.page
 
-        self.app.route_to_viewbuilder["/login"].presenter.access_from_app_demo()  # type: ignore
-        print(self.app.state["demo"])
+        super().__init__(self.data_source, self.view)
 
     def build(self) -> None:
         self.view.build(self)
-        initial_number = self.model.get_last_number(self.page)
-        self.view.current_number = initial_number
+        self.data_source.check_for_stored_number()
 
-    def handle_plus_click(self, e: ft.ControlEvent) -> None:
-        old_number = self.view.current_number
-        new_number = self.model.increase_number(self.page, old_number)
-        self.view.current_number = new_number
+    def handle_increment_intent(self) -> None:
+        self.data_source.increment_number()
 
-    def handle_minus_click(self, e: ft.ControlEvent) -> None:
-        old_number = self.view.current_number
-        new_number = self.model.decrease_number(self.page, old_number)
-        self.view.current_number = new_number
+    def handle_decrement_intent(self) -> None:
+        self.data_source.decrement_number()

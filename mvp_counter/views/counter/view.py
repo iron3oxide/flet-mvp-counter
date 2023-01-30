@@ -1,39 +1,37 @@
 import flet as ft
+from flet_mvp_utils import MvpView
 
 from mvp_counter.controls import buttons, text_fields
 from mvp_counter.views.counter.protocols import CounterPresenterProtocol
 
 
-class CounterView(ft.View):
+class CounterView(MvpView):
     def __init__(self, route: str) -> None:
+        self.ref_map = {"number": ft.Ref[ft.TextField]()}
         super().__init__(
+            ref_map=self.ref_map,
             route=route,
             vertical_alignment=ft.MainAxisAlignment.CENTER,
             appbar=ft.AppBar(),
         )
 
-        self._txt_number = ft.Ref[ft.TextField]()
-
     def build(self, presenter: CounterPresenterProtocol) -> None:
-        ui = self._get_ui(presenter)
+        self.presenter = presenter
+        ui = self._get_ui()
         self.controls.append(ui)
 
-    def _get_ui(self, presenter: CounterPresenterProtocol) -> ft.Row:
+    def _get_ui(self) -> ft.Row:
         return ft.Row(
             [
-                buttons.remove(presenter.handle_minus_click),
-                text_fields.counter(self._txt_number),
-                buttons.add(presenter.handle_plus_click),
+                buttons.remove(self.decrement_intent),
+                text_fields.counter(self.ref_map["number"]),
+                buttons.add(self.increment_intent),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
         )
 
-    @property
-    def current_number(self) -> int:
-        return int(self._txt_number.current.value)  # type: ignore
+    def increment_intent(self, e: ft.ControlEvent) -> None:
+        self.presenter.handle_increment_intent()
 
-    @current_number.setter
-    def current_number(self, number: int) -> None:
-        self._txt_number.current.value = str(number)
-        if self._txt_number.current.page:
-            self._txt_number.current.update()
+    def decrement_intent(self, e: ft.ControlEvent) -> None:
+        self.presenter.handle_decrement_intent()
