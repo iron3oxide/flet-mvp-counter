@@ -1,20 +1,16 @@
 import flet as ft
-from flet_mvp_utils import MvpView
+from fletched.mvp import MvpView, ViewConfig
 
 from mvp_counter.controls import buttons
 from mvp_counter.views.login.protocols import LoginPresenterProtocol
 
 
 class LoginView(MvpView):
-    def __init__(self, route: str) -> None:
-        self.ref_map = {"remember_me": ft.Ref[ft.Checkbox]()}
-
-        super().__init__(
-            ref_map=self.ref_map,
-            route=route,
-            vertical_alignment=ft.MainAxisAlignment.CENTER,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        )
+    ref_map = {"remember_me": ft.Ref[ft.Checkbox]()}
+    config = ViewConfig(
+        vertical_alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
 
     def build(self, presenter: LoginPresenterProtocol) -> None:
         self.presenter = presenter
@@ -41,5 +37,5 @@ class LoginView(MvpView):
         )
 
     def login_intent(self, e: ft.ControlEvent) -> None:
-        remember_me = self.ref_map["remember_me"].current.value
+        remember_me = bool(self.ref_map["remember_me"].current.value)
         self.presenter.handle_login_intent(remember_me)

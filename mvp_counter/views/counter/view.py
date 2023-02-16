@@ -1,19 +1,16 @@
 import flet as ft
-from flet_mvp_utils import MvpView
+from fletched.mvp import MvpView, ViewConfig
 
 from mvp_counter.controls import buttons, text_fields
 from mvp_counter.views.counter.protocols import CounterPresenterProtocol
 
 
 class CounterView(MvpView):
-    def __init__(self, route: str) -> None:
-        self.ref_map = {"number": ft.Ref[ft.TextField]()}
-        super().__init__(
-            ref_map=self.ref_map,
-            route=route,
-            vertical_alignment=ft.MainAxisAlignment.CENTER,
-            appbar=ft.AppBar(),
-        )
+    ref_map = {"number": ft.Ref[ft.TextField]()}
+    config = ViewConfig(
+        vertical_alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
 
     def build(self, presenter: CounterPresenterProtocol) -> None:
         self.presenter = presenter

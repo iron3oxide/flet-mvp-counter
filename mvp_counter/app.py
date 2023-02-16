@@ -1,4 +1,4 @@
-from flet_routed_app import CustomAppState, RoutedApp
+from fletched.routed_app import CustomAppState, RoutedApp
 
 
 class AppState(CustomAppState):

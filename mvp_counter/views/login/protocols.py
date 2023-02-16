@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from flet_mvp_utils import MvpViewProtocol
+from fletched.mvp import MvpViewProtocol
 from pydantic import BaseModel
 
 

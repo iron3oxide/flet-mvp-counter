@@ -1,4 +1,5 @@
-from flet_routed_app import MvpViewBuilder, login_required, route
+from fletched.mvp import MvpViewBuilder
+from fletched.routed_app import login_required, route
 
 from mvp_counter.views.counter.business_logic import CounterDataSource
 from mvp_counter.views.counter.presenter import CounterPresenter

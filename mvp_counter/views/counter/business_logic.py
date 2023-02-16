@@ -1,6 +1,4 @@
-from flet_mvp_utils import MvpDataSource, MvpModel
-
-from mvp_counter.app import App
+from fletched.mvp import MvpDataSource, MvpModel
 
 
 class CounterModel(MvpModel):
@@ -8,11 +6,7 @@ class CounterModel(MvpModel):
 
 
 class CounterDataSource(MvpDataSource):
-    def __init__(self, app: App, route_parameters: dict) -> None:
-        self.app = app
-        self.page = app.page
-        self.route_parameters = route_parameters
-        super().__init__(CounterModel)
+    current_model = CounterModel()
 
     def check_for_stored_number(self) -> None:
         if self.page.client_storage.contains_key("last_number"):

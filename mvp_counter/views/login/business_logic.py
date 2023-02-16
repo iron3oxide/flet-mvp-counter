@@ -1,6 +1,6 @@
 from flet.auth.providers.github_oauth_provider import GitHubOAuthProvider
 from flet.security import decrypt, encrypt
-from flet_mvp_utils import MvpDataSource, MvpModel
+from fletched.mvp import MvpDataSource, MvpModel
 
 from mvp_counter.app import App
 from mvp_counter.settings import settings
@@ -11,12 +11,10 @@ class LoginModel(MvpModel):
 
 
 class LoginDataSource(MvpDataSource):
-    def __init__(self, app: App, route_parameters: dict) -> None:
-        super().__init__(LoginModel)
+    current_model = LoginModel()
 
-        self.app = app
-        self.page = app.page
-        self.route_parameters = route_parameters
+    def __init__(self, *, app: App | None, route_params: dict[str, str]) -> None:
+        super().__init__(app=app, route_params=route_params)
         self.provider = GitHubOAuthProvider(
             client_id=settings.github_client_id,
             client_secret=settings.github_client_secret,
@@ -28,9 +26,9 @@ class LoginDataSource(MvpDataSource):
 
         stored_token = self._get_stored_token()
         if stored_token:
-            self.page.login(self.provider, saved_token=stored_token)
+            self.page.login(self.provider, saved_token=stored_token)  # type: ignore
 
-        self.page.login(self.provider)
+        self.page.login(self.provider)  # type: ignore
         if not self.page.auth:
             return
 
@@ -40,9 +38,9 @@ class LoginDataSource(MvpDataSource):
         self.page.go("/counter")
 
     def _store_token(self) -> None:
-        if not self.page.auth or not self.page.auth.token:
+        if not self.page.auth or not self.page.auth.token:  # type: ignore
             return
-        token = self.page.auth.token.to_json()
+        token = self.page.auth.token.to_json()  # type: ignore
         encrypted_token = encrypt(token, settings.app_secret_key)
         self.page.client_storage.set("auth_token", encrypted_token)
 

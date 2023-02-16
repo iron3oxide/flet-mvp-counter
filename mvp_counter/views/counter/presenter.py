@@ -1,17 +1,15 @@
-from flet_mvp_utils import MvpPresenter
+from dataclasses import dataclass
+
+from fletched.mvp import MvpPresenter
 
 from mvp_counter.views.counter.business_logic import CounterDataSource
 from mvp_counter.views.counter.protocols import CounterViewProtocol
 
 
+@dataclass
 class CounterPresenter(MvpPresenter):
-    def __init__(
-        self, *, data_source: CounterDataSource, view: CounterViewProtocol
-    ) -> None:
-        self.data_source = data_source
-        self.view = view
-
-        super().__init__(self.data_source, self.view)
+    data_source: CounterDataSource
+    view: CounterViewProtocol
 
     def build(self) -> None:
         self.view.build(self)
