@@ -10,7 +10,7 @@ class CounterDataSource(MvpDataSource):
 
     def check_for_stored_number(self) -> None:
         if self.page.client_storage.contains_key("last_number"):
-            last_number: int = self.page.client_storage.get("last_number")  # type: ignore
+            last_number = self.page.client_storage.get("last_number")
             self.update_model_complete({"number": last_number})
 
     def increment_number(self) -> None:

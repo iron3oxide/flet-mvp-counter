@@ -1,6 +1,7 @@
 from flet.auth.providers.github_oauth_provider import GitHubOAuthProvider
 from flet.security import decrypt, encrypt
 from fletched.mvp import MvpDataSource, MvpModel
+from httpx import HTTPStatusError
 
 from mvp_counter.app import App
 from mvp_counter.settings import settings
@@ -25,11 +26,13 @@ class LoginDataSource(MvpDataSource):
         self.update_model_complete({"remember_me": remember_me})
 
         stored_token = self._get_stored_token()
-        if stored_token:
+        try:
             self.page.login(self.provider, saved_token=stored_token)  # type: ignore
+        except HTTPStatusError:
+            print("stored token probably expired, remove it")
 
-        self.page.login(self.provider)  # type: ignore
         if not self.page.auth:
+            print("auth failed")
             return
 
         if remember_me and not stored_token:

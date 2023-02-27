@@ -214,14 +214,14 @@ repath = ">=0.9.0,<0.10.0"
 
 [[package]]
 name = "fletched"
-version = "0.4.1"
+version = "0.4.5"
 description = "Tools to build flet apps with multiple views/routes"
 category = "main"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "fletched-0.4.1-py3-none-any.whl", hash = "sha256:8df7b1d8fdc223b616d71b84ee4afca3019b4febc03590ca8fec89e3552f2b62"},
-    {file = "fletched-0.4.1.tar.gz", hash = "sha256:6ba4e87369f0a844b9d16074cf9aabfa43df77a233364f213fd25f98173b6336"},
+    {file = "fletched-0.4.5-py3-none-any.whl", hash = "sha256:9721e00d153c5fe2455d999e2a871b2e8c3a9271be7c86b55c980e399e14c269"},
+    {file = "fletched-0.4.5.tar.gz", hash = "sha256:5db1503fa3e05962804f512689861b10c4c78dc9a77ff2af281a8b1b9501fca1"},
 ]
 
 [package.dependencies]
