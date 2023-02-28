@@ -19,7 +19,7 @@ class LoginDataSource(MvpDataSource):
         self.provider = GitHubOAuthProvider(
             client_id=settings.github_client_id,
             client_secret=settings.github_client_secret,
-            redirect_url="http://127.0.0.1:34567/api/oauth/redirect",
+            redirect_url=f"{settings.hostname}:34567/api/oauth/redirect",
         )
 
     def login(self, remember_me: bool) -> None:

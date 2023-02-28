@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     github_client_id: str = Field(env="GITHUB_CLIENT_ID")
     github_client_secret: str = Field(env="GITHUB_CLIENT_SECRET")
     app_secret_key: str = Field(env="APP_SECRET_KEY")
+    hostname: str = Field(env="APP_HOSTNAME")
 
     class Config:
         env_file = ".env"
